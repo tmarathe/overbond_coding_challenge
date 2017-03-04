@@ -15,4 +15,4 @@ Finally, the `write_data()` function takes a dictionary data structure computed 
 
 Some tests have been included in the `__main__` scope. 
 
-Note: If you run `overbond_challenge.py`, you will need to keep the folder `required_files` in the same directory, as the test compare generated files to those in the folder (which were calculated manually). Alternatively, you can comment out the tests and call the functions on files of your own.
+Note: If you run `overbond_challenge.py`, you will need to keep the folder `required_files` in the same directory, as the test compare generated files to those in the folder (which were calculated manually). Alternatively, you can comment out the tests and call the functions on files of your own, or import the functions into another test script to run.
