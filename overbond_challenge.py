@@ -18,7 +18,7 @@ def read_data(filename):
         return corporate, government
 
 
-def yield_spread(corp, gov, outfile):
+def yield_spread(corp, gov):
     # create two lists (term length, and bond names) with one pass
     benchmark_terms, benchmark_bonds = zip(*[(gov[g][0], g) for g in gov])
     yield_spread_dict = {}
@@ -27,17 +27,21 @@ def yield_spread(corp, gov, outfile):
         benchmark = benchmark_bonds[i]
         spread = np.abs(corp[bond][1] - gov[benchmark][1])
         yield_spread_dict[bond] = [benchmark, str(spread)+"%"]
+    return yield_spread_dict
 
+def write_yield_spread(yield_spread_dict, outfile):
     with open(outfile, 'w') as csvfile:
         csv_writer = csv.writer(csvfile, delimiter=',')
         csv_writer.writerow(("bond", "benchmark", "spread_to_benchmark"))
         for k, v in yield_spread_dict.items():
             csv_writer.writerow([k] + v)
 
+#def spread_to_curve(corp, gov):
 
 if __name__ == "__main__":
 
     input_file = "sample_input.csv"
     corp, gov = read_data(input_file)
     #print(corp, gov)
-    yield_spread(corp, gov, "test_out.csv")
+    spread = yield_spread(corp, gov)
+    write_yield_spread(spread, "sample_out.csv")
